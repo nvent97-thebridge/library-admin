@@ -17,7 +17,7 @@ const Book = db.sequelize.define(
     publicationYear: {
       type: DataTypes.INTEGER
     },
-    stock: {
+    ISBN: {
       type: DataTypes.INTEGER
     }
   },
