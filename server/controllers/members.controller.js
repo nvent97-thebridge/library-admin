@@ -1,9 +1,12 @@
-const Member = require("../models/Member")
+const Member = require("../models/Member");
 
-const createMember = (req, res) => {
-    const memberName = req.body.name;
-    
-    res.send(memberName)
-}
+const createMember = async (req, res) => {
+  const memberName = req.body.name;
+  const createdMember = await Member.create({
+    name: memberName,
+    registrationDate: new Date(),
+  });
+  res.status(201).send(createdMember.id);
+};
 
-exports.createMember = createMember
+exports.createMember = createMember;
