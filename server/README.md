@@ -19,8 +19,8 @@ RESPONSE
 POST /loans
 REQUEST
 {
-    member_id: int,
-    book_id: int
+    memberId: int,
+    bookId: int
 }
 RESPONSE
 {
@@ -33,7 +33,7 @@ RESPONSE
 PATCH /loans
 REQUEST
 {
-    book_id: int
+    bookId: int
 }
 RESPONSE
 {
