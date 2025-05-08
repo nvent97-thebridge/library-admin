@@ -6,7 +6,7 @@ const createMember = async (req, res) => {
     name: memberName,
     registrationDate: new Date(),
   });
-  res.status(201).send(createdMember.id);
+  res.status(201).send({id: createdMember.id});
 };
 
 exports.createMember = createMember;
