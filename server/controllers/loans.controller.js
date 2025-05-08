@@ -33,4 +33,24 @@ const loanBookToMember = async (req, res) => {
   res.status(201).send({ deadline: createdLoan.deadline });
 };
 
+const returnBook = async (req, res) => {
+  const bookId = req.body.bookId;
+
+  const returnedLoan = await Loan.update(
+    { returnDate: new Date() },
+    {
+      where: {
+        BookId: bookId,
+        returnDate: null,
+      },
+    }
+  );
+  // TODO: Implement loan status
+  // if new Date > deadline => return delayed
+  // if new Date < deadline => return ontime
+
+  res.send({ updatedLoans: returnedLoan[0] });
+};
+
 exports.loanBookToMember = loanBookToMember;
+exports.returnBook = returnBook;
