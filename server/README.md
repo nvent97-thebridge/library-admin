@@ -37,7 +37,7 @@ REQUEST
 }
 RESPONSE
 {
-    status: 'ontime' | 'delayed' #TBD
+    canceledLoans: int,
 }
 ```
 

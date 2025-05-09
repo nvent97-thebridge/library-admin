@@ -36,7 +36,13 @@ const loanBookToMember = async (req, res) => {
 const returnBook = async (req, res) => {
   const bookId = req.body.bookId;
 
-  const returnedLoan = await Loan.update(
+  const foundBook = await Book.findByPk(bookId);
+  if (!foundBook) {
+    res.status(404).send("Book not found");
+    return;
+  }
+
+  const updatedLoans = await Loan.update(
     { returnDate: new Date() },
     {
       where: {
@@ -45,11 +51,8 @@ const returnBook = async (req, res) => {
       },
     }
   );
-  // TODO: Implement loan status
-  // if new Date > deadline => return delayed
-  // if new Date < deadline => return ontime
 
-  res.send({ updatedLoans: returnedLoan[0] });
+  res.send({ canceledLoans: updatedLoans[0] });
 };
 
 exports.loanBookToMember = loanBookToMember;
