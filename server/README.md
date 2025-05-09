@@ -41,9 +41,9 @@ RESPONSE
 }
 ```
 
-### Use case: Listar los prestamos de un socio
+### Use case: Listar los prestamos y filtrar por socio
 ```
-GET /loan?memberId=member_id
+GET /loan?memberId=member_id&activeLoans=bool
 REQUEST
 {}
 RESPONSE
@@ -53,7 +53,8 @@ RESPONSE
             returnDate: datetime,
             loanDate: datetime,
             deadline: datetime,
-            bookTitle: string
+            bookTitle: string,
+            memberName: string
         }
     ]
 }
