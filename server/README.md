@@ -59,3 +59,13 @@ RESPONSE
     ]
 }
 ```
+
+## Elige tu propia aventura
+
+1. Cliente!
+
+2. Consulta SQL para obtener un ranking de socios con mayor cantidad de prestamos
+
+3. Implementar Swagger para documentar (y probar) la API
+
+4. Explorar Jest para testear la API

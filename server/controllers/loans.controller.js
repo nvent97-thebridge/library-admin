@@ -84,6 +84,8 @@ const getLoans = async (req, res) => {
       returnDate: loan.returnDate,
       loanDate: loan.loanDate,
       deadline: loan.deadline,
+      bookId: loan?.BookId,
+      memberId: loan?.MemberId,
       bookTitle: loan?.Book?.title,
       memberName: loan?.Member?.name,
     };
