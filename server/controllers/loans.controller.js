@@ -76,7 +76,7 @@ const getLoans = async (req, res) => {
 
   const loans = await Loan.findAll({
     where: whereFilter,
-    include: [{ model: Book }, {model: Member}],
+    include: [{ model: Book, attributes: ['title'] }, {model: Member, attributes: ['name']}],
   });
 
   const parsedLoans = loans.map((loan) => {
