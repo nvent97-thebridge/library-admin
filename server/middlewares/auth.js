@@ -1,6 +1,11 @@
 const Member = require("../models/Member");
+const jwt = require("jsonwebtoken");
+const { jwt_secret } = require("../config/config.json") ["development"]
 
 const authMiddleware = async (req, res, next) => {
+  
+
+
   // Existe llave del usuario
   const userKey = req.headers["llave"];
   if (!userKey) {
@@ -12,6 +17,14 @@ const authMiddleware = async (req, res, next) => {
   if (!user) {
     res.status(401).send("Invalid auth header");
     return;
+  }
+
+  const token = req.headers.authorization;
+  const payload = jwt.verify(token, jwt_secret)
+  const userToken = user.token
+
+  if(!userToken) {
+    res.status(401).send("User not authorized")
   }
   // Agregar el usuario a la request que se esta haciendo
   req.user = user.dataValues;
