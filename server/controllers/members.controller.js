@@ -19,7 +19,8 @@ const login = async (req, res) => {
     res.status(400).send("INCORRECT_USER_OR_PASSWORD");
     return;
   }
-  let token = jwt.sign({ id: user.id }, jwt_secret);
+
+  let token = jwt.sign({ userId: user.id }, jwt_secret);
 
   res.status(201).send({token: token});
 };

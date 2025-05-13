@@ -20,9 +20,6 @@ const Member = db.sequelize.define(
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
-    },
-    token: {
-      type: DataTypes.STRING,
     }
   },
   {}
