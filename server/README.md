@@ -69,3 +69,9 @@ RESPONSE
 3. Implementar Swagger para documentar (y probar) la API
 
 4. Explorar Jest para testear la API
+
+## Objetivos:
+
+1. Que el login funcione correctamente con hashes
+
+2. Implementar register endpoint

@@ -5,9 +5,9 @@ const login = async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-//   const hashedPassword = bcryptjs.hashSync(password);
-//   res.send(hashedPassword);
-//   return;
+  //   const hashedPassword = bcryptjs.hashSync(password);
+  //   res.send(hashedPassword);
+  //   return;
 
   const user = await Member.findOne({ where: { user: username } });
   if (!user) {
@@ -18,12 +18,17 @@ const login = async (req, res) => {
   if (!isPasswordMatch) {
     res.status(400).send("INCORRECT_USER_OR_PASSWORD");
     return;
-}
+  }
   res.status(201).send({ llave: user.id });
 };
 
 const createMember = async (req, res) => {
   const memberName = req.body.name;
+  const memberPassword = req.body.password
+  const memberUsername = req.body.user
+
+  // IMPORTANTE: HASHEAR LA CONTRASENIA
+
   const createdMember = await Member.create({
     name: memberName,
     registrationDate: new Date(),
