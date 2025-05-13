@@ -24,16 +24,36 @@ const login = async (req, res) => {
 
 const createMember = async (req, res) => {
   const memberName = req.body.name;
-  const memberPassword = req.body.password
-  const memberUsername = req.body.user
+  const memberPassword = req.body.password;
+  const memberUsername = req.body.user;
 
-  // IMPORTANTE: HASHEAR LA CONTRASENIA
+  if(!memberPassword || !memberName || !memberUsername){
+    res.status(400).send("Missing required info");
+    return
+  }
 
-  const createdMember = await Member.create({
-    name: memberName,
-    registrationDate: new Date(),
-  });
-  res.status(201).send({ id: createdMember.id });
+  const hashedPassword = bcryptjs.hashSync(memberPassword);
+
+  try {
+    const existingUser = await Member.findOne({
+      where: { user: memberUsername },
+    });
+    if(existingUser){
+      res.status(400).send("User already exists");
+      return;
+    }
+
+    const createdMember = await Member.create({
+      name: memberName,
+      user: memberUsername,
+      registrationDate: new Date(),
+      password: hashedPassword,
+    });
+    res.status(201).send({ id: createdMember.id });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Unexpected register error");
+  }
 };
 
 exports.createMember = createMember;
